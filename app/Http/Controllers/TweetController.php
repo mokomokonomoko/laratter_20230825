@@ -16,6 +16,7 @@ class TweetController extends Controller
      */
     public function index()
     {
+      
        $tweets = Tweet::getAllOrderByUpdated_at();
        return response()->view('tweet.index',compact('tweets'));
     }
@@ -45,6 +46,8 @@ class TweetController extends Controller
       ->withInput()
       ->withErrors($validator);
   }
+
+
   // create()は最初から用意されている関数
   // 戻り値は挿入されたレコードの情報
   $data = $request->merge(['user_id' => Auth::user()->id])->all();

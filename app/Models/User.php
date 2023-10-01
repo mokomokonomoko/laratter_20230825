@@ -50,7 +50,7 @@ class User extends Authenticatable
    
   public function tweets()
   {
-     return $this->belongsToMany(Tweet::class, 'tweet_user', 'user_id', 'tweet_id')->withTimestamps();
+     return $this->belongsToMany(Tweet::class)->withTimestamps();
   }
 
   // app/Models/User.php

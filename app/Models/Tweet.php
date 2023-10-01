@@ -27,7 +27,7 @@ class Tweet extends Model
   
   public function users()
   {
-    return $this->belongsToMany(User::class, 'tweet_user', 'tweet_id', 'user_id')->withTimestamps();
+    return $this->belongsToMany(User::class)->withTimestamps();
   }
 
   /** ツイート数 */
@@ -38,11 +38,7 @@ class Tweet extends Model
             ->groupBy('following_id');
     }
 
-    public function tweets()
-{
-    return $this->belongsToMany(User::class, 'tweet_user', 'tweet_id', 'user_id')->withTimestamps();
-}
-
+    
 
 }
 
