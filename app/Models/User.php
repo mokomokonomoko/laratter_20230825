@@ -50,6 +50,27 @@ class User extends Authenticatable
    
   public function tweets()
   {
-    return $this->belongsToMany(Tweet::class)->withTimestamps();
+     return $this->belongsToMany(Tweet::class, 'tweet_user', 'user_id', 'tweet_id')->withTimestamps();
   }
+
+  // app/Models/User.php
+
+// 省略
+
+public function followings()
+{
+  return $this->belongsToMany(self::class, "follows", "user_id", "following_id")->withTimestamps();
+}
+
+public function followers()
+{
+  return $this->belongsToMany(self::class, "follows", "following_id", "user_id")->withTimestamps();
+}
+
+// User.php モデル
+public function tweetCount()
+{
+     return $this->hasMany(Tweet::class)->count();
+}
+
 }

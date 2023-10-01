@@ -27,7 +27,22 @@ class Tweet extends Model
   
   public function users()
   {
-    return $this->belongsToMany(User::class)->withTimestamps();
+    return $this->belongsToMany(User::class, 'tweet_user', 'tweet_id', 'user_id')->withTimestamps();
   }
+
+  /** ツイート数 */
+  public function tweetCount()
+    {
+        return $this->belongsToMany(User::class, "follows", "user_id", "following_id")
+            ->selectRaw('count(*) as count')
+            ->groupBy('following_id');
+    }
+
+    public function tweets()
+{
+    return $this->belongsToMany(User::class, 'tweet_user', 'tweet_id', 'user_id')->withTimestamps();
+}
+
+
 }
 
